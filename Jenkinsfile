@@ -8,6 +8,17 @@ pipeline {
     stages {
         stage('Destroy container') {
             steps {
+                script {
+                    if docker ps -a | grep test-web {
+                        docker rm -f test-web
+                    } else {
+                        echo "Nothing to remove"
+                    }
+                }
+            }
+        }
+        stage('Destroy container') {
+            steps {
                 echo '> Checking out the source control ...'
                 checkout scm
             }
