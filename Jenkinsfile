@@ -9,7 +9,7 @@ pipeline {
         stage('Destroy container') {
             steps {
                 script {
-                    if sh 'docker ps -a | grep test-web' {
+                    if (sh 'docker ps -a | grep test-web') {
                         sh 'docker rm -f test-web'
                     } else {
                         echo "Nothing to remove"
