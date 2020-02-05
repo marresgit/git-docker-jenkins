@@ -9,15 +9,15 @@ pipeline {
         stage('Destroy container') {
             steps {
                 script {
-                    if docker ps -a | grep test-web {
-                        docker rm -f test-web
+                    if sh 'docker ps -a | grep test-web' {
+                        sh 'docker rm -f test-web'
                     } else {
                         echo "Nothing to remove"
                     }
                 }
             }
         }
-        stage('Destroy container') {
+        stage('SCM') {
             steps {
                 echo '> Checking out the source control ...'
                 checkout scm
